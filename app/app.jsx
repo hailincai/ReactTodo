@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Route, Router, IndexRoute, hashHistory} from "react-router";
+import TodoApp from "TodoApp";
 
 //load foundation-sites
 //style! inject style in html
@@ -13,6 +14,6 @@ require("style!css!sass!applicationStyles");
 //using createClass method,
 //the method in the component are automatically bound to component itself
 ReactDOM.render(
-  <p>Boilplate final project</p>,
+  <TodoApp/>,
   document.getElementById("app")
 );
