@@ -2,25 +2,26 @@ import React from "react";
 import TodoList from "TodoList";
 import AddTodoForm from "AddTodoForm";
 import TodoSearch from "TodoSearch";
+import uuid from "node-uuid";
 
 var TodoApp = React.createClass({
   getInitialState: function() {
     return ({
       todos: [
         {
-          id: 1,
+          id: uuid(),
           text: "Walk to dog"
         },
         {
-          id: 2,
+          id: uuid(),
           text: "Clean the yard"
         },
         {
-          id: 3,
+          id: uuid(),
           text: "Deposit check"
         },
         {
-          id: 4,
+          id: uuid(),
           text: "Check EOB status"
         }
       ],
@@ -50,7 +51,15 @@ var TodoApp = React.createClass({
   },
 
   handleAddTodo: function(newTodoText) {
-    alert("new todo: " + newTodoText);
+    this.setState({
+      todos: [
+        ...this.state.todos,
+        {
+          id: uuid(),
+          text: newTodoText
+        }
+      ]
+    })
   }
 });
 
