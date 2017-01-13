@@ -1,6 +1,7 @@
 import React from "react";
 import TodoList from "TodoList";
 import AddTodoForm from "AddTodoForm";
+import TodoSearch from "TodoSearch";
 
 var TodoApp = React.createClass({
   getInitialState: function() {
@@ -22,7 +23,10 @@ var TodoApp = React.createClass({
           id: 4,
           text: "Check EOB status"
         }
-      ]
+      ],
+
+      showCompleted: false,
+      searchText: ""
     });
   },
 
@@ -31,10 +35,18 @@ var TodoApp = React.createClass({
 
     return (
       <div>
-        <TodoList todos={todos}/>
+        <TodoSearch onSearch={this.handleSearch}/>
+        <TodoList todos={todos} {...this.state}/>
         <AddTodoForm onAddTodo={this.handleAddTodo}/>
       </div>
     );
+  },
+
+  handleSearch: function(showCompleted, searchText) {
+    this.setState({
+      showCompleted: showCompleted,
+      searchText: searchText.toLowerCase()
+    });
   },
 
   handleAddTodo: function(newTodoText) {
