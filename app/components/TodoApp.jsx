@@ -1,38 +1,23 @@
 import React from "react";
+import uuid from "node-uuid";
+
 import TodoList from "TodoList";
 import AddTodoForm from "AddTodoForm";
 import TodoSearch from "TodoSearch";
-import uuid from "node-uuid";
+import TodoAPI from "TodoAPI";
 
 var TodoApp = React.createClass({
   getInitialState: function() {
     return ({
-      todos: [
-        {
-          id: uuid(),
-          text: "Walk to dog",
-          completed: false
-        },
-        {
-          id: uuid(),
-          text: "Clean the yard",
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: "Deposit check",
-          completed: true
-        },
-        {
-          id: uuid(),
-          text: "Check EOB status",
-          completed: false
-        }
-      ],
+      todos: TodoAPI.getTodos(),
 
       showCompleted: false,
       searchText: ""
     });
+  },
+
+  componentDidUpdate: function() {
+    TodoAPI.setTodos(this.state.todos);
   },
 
   render: function() {
