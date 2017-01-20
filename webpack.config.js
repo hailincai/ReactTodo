@@ -4,7 +4,7 @@ var path = require("path");
 module.exports = {
   entry: {
     "app": "./app/app.jsx",
-    "vendor": ["react", "react-dom", "react-router", "script!jquery/dist/jquery.min.js", "script!foundation-sites/dist/foundation.min.js"]
+    "vendor": ["react", "react-dom", "react-router", "redux", "redux-thunk", "node-uuid", "moment", "script!jquery/dist/jquery.min.js", "script!foundation-sites/dist/foundation.min.js"]
   },
 
   externals: {
@@ -32,7 +32,8 @@ module.exports = {
       "./app/api"
     ],
     alias: {
-      applicationStyles: "app/styles/app.scss"
+      applicationStyles: "app/styles/app.scss",
+      actions: "app/actions/actions.jsx"
     },
     extensions: ["", ".js", ".jsx"]
   },
