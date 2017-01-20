@@ -3,6 +3,15 @@ import ReactDOM from "react-dom";
 import {Route, Router, IndexRoute, hashHistory} from "react-router";
 import TodoApp from "TodoApp";
 
+import actions from "actions";
+import configureStore from "configureStore";
+
+var store = configureStore.configure();
+store.subscribe(() => {
+ console.log("New State", store.getState());
+});
+store.dispatch(actions.addTodo("Clean the yard"));
+
 //load foundation-sites
 //style! inject style in html
 //css! load css file
