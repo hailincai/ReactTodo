@@ -3,9 +3,11 @@ import ReactDOM from "react-dom";
 import expect from "expect";
 import $ from "jquery";
 import TestUtils from "react-addons-test-utils";
+import {Provider} from "react-redux";
 
-import TodoList from "TodoList";
-import Todo from "Todo";
+import ConnectedTodoList, {TodoList} from "TodoList";
+import ConnectedTodo, {Todo} from "Todo";
+import {configure} from "configureStore";
 
 describe("TodoList", () => {
   it("should exist", () => {
@@ -16,28 +18,36 @@ describe("TodoList", () => {
     let todos = [
       {
         id: 1,
-        text: "Walk to dog"
+        text: "Walk to dog",
+        completed: false,
+        completedAt: undefined,
+        createAt: 500
       },
       {
         id: 2,
-        text: "Clean the yard"
-      },
-      {
-        id: 3,
-        text: "Deposit check"
-      },
-      {
-        id: 4,
-        text: "Check EOB status"
+        text: "Clean the yard",
+        completed: false,
+        completedAt: undefined,
+        createAt: 500
       }
     ];
 
-    var todoList = TestUtils.renderIntoDocument(<TodoList todos={todos}/>);
-    var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, Todo);
+    //change to use Provider is because todo using connect to get dispatch method
+    //without provider, it will not work
+    var store = configure({
+      todos: todos
+    });
+    var provider = TestUtils.renderIntoDocument(
+      <Provider store={store}>
+        <ConnectedTodoList/>
+      </Provider>
+    );
+    var todoList = TestUtils.scryRenderedComponentsWithType(provider, ConnectedTodoList)[0];
+    var todoComponents = TestUtils.scryRenderedComponentsWithType(todoList, ConnectedTodo);
 
     expect(todoComponents.length).toBe(todos.length);
   });
-
+  
   it("should render empty message if not todo", () => {
     let todos = [];
 

@@ -6,6 +6,8 @@ import TodoApp from "TodoApp";
 import actions from "actions";
 import configureStore from "configureStore";
 
+import {Provider} from "react-redux";
+
 var store = configureStore.configure();
 store.subscribe(() => {
  console.log("New State", store.getState());
@@ -23,6 +25,8 @@ require("style!css!sass!applicationStyles");
 //using createClass method,
 //the method in the component are automatically bound to component itself
 ReactDOM.render(
-  <TodoApp/>,
+  <Provider store={store}>
+    <TodoApp/>
+  </Provider>,
   document.getElementById("app")
 );

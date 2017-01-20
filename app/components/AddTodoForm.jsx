@@ -1,6 +1,8 @@
 import React from "react";
+import {connect} from "react-redux";
+import actions from "actions";
 
-var AddTodoForm = React.createClass({
+export var AddTodoForm = React.createClass({
   propTypes: function(){
     return(
       {
@@ -26,11 +28,11 @@ var AddTodoForm = React.createClass({
     var newTodoText = this.refs.newtodo.value;
     if (typeof newTodoText === "string" && newTodoText.length > 0){
       this.refs.newtodo.value = "";
-      this.props.onAddTodo(newTodoText);
+      this.props.dispatch(actions.addTodo(newTodoText));
     }else{
       this.refs.newtodo.focus();
     }
   }
 });
 
-export default AddTodoForm;
+export default connect()(AddTodoForm);
