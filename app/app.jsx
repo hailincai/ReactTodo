@@ -1,18 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Route, Router, IndexRoute, hashHistory} from "react-router";
-import TodoApp from "TodoApp";
+import {Provider} from "react-redux";
 
+import TodoApp from "TodoApp";
+import TodoAPI from "TodoAPI";
 import actions from "actions";
 import configureStore from "configureStore";
 
-import {Provider} from "react-redux";
+
 
 var store = configureStore.configure();
 store.subscribe(() => {
- console.log("New State", store.getState());
+  var state = store.getState();
+  console.log("New State", state);
+  TodoAPI.setTodos(state.todos);
 });
-store.dispatch(actions.addTodo("Clean the yard"));
+
+var initialTodos = TodoAPI.getTodos();
+store.dispatch(actions.addTodos(initialTodos));
 
 //load foundation-sites
 //style! inject style in html

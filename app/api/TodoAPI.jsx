@@ -24,6 +24,7 @@ var TodoAPI = {
   filterTodos: function(todos, showCompleted, searchText){
     var filterTodos = todos;
 
+    console.log("showCompleted:", showCompleted);
     //filter by showCompleted
     filterTodos = filterTodos.filter((todo) => {
       return !todo.completed || showCompleted;
