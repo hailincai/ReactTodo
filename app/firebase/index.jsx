@@ -2,11 +2,11 @@ import firebase from "firebase";
 
 try{
   var config = {
-    apiKey: "AIzaSyBMKq6W9b3Xf4muURfXuAXwzcOe8fX5guw",
-    authDomain: "mead-todo-app-7c991.firebaseapp.com",
-    databaseURL: "https://mead-todo-app-7c991.firebaseio.com",
-    storageBucket: "mead-todo-app-7c991.appspot.com",
-    messagingSenderId: "611788729973"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    databaseURL: process.env.DATABASE_URL,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID
   };
   firebase.initializeApp(config);
 }catch (e) {
