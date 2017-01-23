@@ -4,6 +4,8 @@ import expect from "expect";
 import $ from "jquery";
 import TestUtils from "react-addons-test-utils";
 
+import * as actions from "actions";
+
 import {AddTodoForm} from "AddTodoForm";
 
 describe("AddTodoForm", () => {
@@ -14,6 +16,7 @@ describe("AddTodoForm", () => {
   describe("onAddTodo", () => {
     it("should dispatch ADD_TODO if input valid content", () => {
       var todoText = "abc";
+      var action = actions.startAddTodo(todoText);
       var spy = expect.createSpy();
       var addTodoForm = TestUtils.renderIntoDocument(<AddTodoForm dispatch={spy}/>);
       var $el = $(ReactDOM.findDOMNode(addTodoForm));
@@ -21,10 +24,7 @@ describe("AddTodoForm", () => {
       addTodoForm.refs.newtodo.value = todoText;
       TestUtils.Simulate.submit($el.find("form")[0]);
 
-      expect(spy).toHaveBeenCalledWith({
-        type: "ADD_TODO",
-        text: todoText
-      });
+      expect(spy).toHaveBeenCalledWith(action);
     });
 
     it("should not dispatch ADD_TODO if input is invalid", () => {

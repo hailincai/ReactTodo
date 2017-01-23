@@ -9,7 +9,6 @@ import actions from "actions";
 import configureStore from "configureStore";
 
 
-
 var store = configureStore.configure();
 store.subscribe(() => {
   var state = store.getState();

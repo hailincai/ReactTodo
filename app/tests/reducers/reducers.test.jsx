@@ -31,14 +31,21 @@ describe("Reducers", () => {
 
   describe("todosReducer", () => {
     it("should add new todo", () => {
+      var todo = {
+        id: 1,
+        text: "some todo",
+        completed: false,
+        createdAt: 120,
+        completedAt: null
+      };
       var action = {
         type: "ADD_TODO",
-        text: "Walk to dogo"
+        todo: todo
       };
 
       var res = reducers.todosReducer(df([]), df(action));
       expect(res.length).toBe(1);
-      expect(res[0].text).toBe(action.text);
+      expect(res[0]).toEqual(action.todo);
     });
 
     it("should add existing todos", () => {

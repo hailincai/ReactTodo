@@ -28,7 +28,7 @@ export var AddTodoForm = React.createClass({
     var newTodoText = this.refs.newtodo.value;
     if (typeof newTodoText === "string" && newTodoText.length > 0){
       this.refs.newtodo.value = "";
-      this.props.dispatch(actions.addTodo(newTodoText));
+      this.props.dispatch(actions.startAddTodo(newTodoText));
     }else{
       this.refs.newtodo.focus();
     }
