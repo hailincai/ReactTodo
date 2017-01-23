@@ -1,10 +1,12 @@
 var webpack = require("webpack");
 var path = require("path");
 
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
 module.exports = {
   entry: {
     "app": "./app/app.jsx",
-    "vendor": ["react", "react-dom", "react-router", "redux", "redux-thunk", "node-uuid", "moment", "script!jquery/dist/jquery.min.js", "script!foundation-sites/dist/foundation.min.js"]
+    "vendor": ["react-redux", "react", "react-dom", "react-router", "redux", "redux-thunk", "node-uuid", "moment", "script!jquery/dist/jquery.min.js", "script!foundation-sites/dist/foundation.min.js"]
   },
 
   externals: {
@@ -15,6 +17,11 @@ module.exports = {
     new webpack.ProvidePlugin({
       "$": "jquery",
       "jQuery": "jquery"
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false
+      }
     }),
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"./public/vendor.js")
   ],
@@ -60,5 +67,5 @@ module.exports = {
     ]
   },
 
-  devtool: "inline-source-map" //only for develope purpose because it makes the bundle.js is very bigger
+  devtool: (process.env.NODE_ENV === "production") ? undefined : "inline-source-map" //only for develope purpose because it makes the bundle.js is very bigger
 };
