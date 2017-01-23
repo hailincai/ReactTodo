@@ -6,14 +6,14 @@ import {connect} from "react-redux";
 export var TodoList = React.createClass({
   render: function() {
     let {todos, showCompleted, searchText} = this.props;
+    var filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
     var renderTodos = () => {
-      if (todos.length == 0) {
+      if (filterTodos.length == 0) {
         return(
           <p className="container__message">Nothing to do</p>
         );
       }else {
-        var filterTodos = TodoAPI.filterTodos(todos, showCompleted, searchText)
         return filterTodos.map((todo) => {
           return <Todo key={todo.id} {...todo}/>
         });

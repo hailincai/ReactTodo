@@ -10,14 +10,8 @@ import configureStore from "configureStore";
 
 
 var store = configureStore.configure();
-store.subscribe(() => {
-  var state = store.getState();
-  console.log("New State", state);
-  TodoAPI.setTodos(state.todos);
-});
 
-var initialTodos = TodoAPI.getTodos();
-store.dispatch(actions.addTodos(initialTodos));
+store.dispatch(actions.startAddTodos());
 
 //load foundation-sites
 //style! inject style in html

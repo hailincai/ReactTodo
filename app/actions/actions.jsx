@@ -67,12 +67,31 @@ export var addTodos = (todos) => {
   }
 };
 
+export var startAddTodos = () => {
+  return (dispatch, getState) => {
+    return firebaseRef.child("todos").once("value")
+               .then((snapshot) => {
+                  var todosObj = snapshot.val() || {};
+                  var parsedTodos = [];
+                  Object.keys(todosObj).forEach((id) => {
+                     parsedTodos.push({
+                      id: id,
+                      ...todosObj[id]
+                    });
+                  });
+
+                  dispatch(addTodos(parsedTodos));
+               })
+  }
+};
+
 export default {
   setSearchText,
   addTodo,
+  startAddTodo,
   toggleShowCompleted,
   updateTodo,
   startToggleTodo,
   addTodos,
-  startAddTodo
+  startAddTodos
 };
