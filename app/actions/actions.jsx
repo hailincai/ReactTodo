@@ -106,6 +106,19 @@ export var startLogout = () => {
   }
 };
 
+export var login = (uid) => {
+  return {
+    type: "LOGIN",
+    uid
+  }
+};
+
+export var logout = () => {
+  return {
+    type: "LOGOUT"
+  }
+};
+
 
 export default {
   setSearchText,
@@ -117,5 +130,7 @@ export default {
   addTodos,
   startAddTodos,
   startLogin,
-  startLogout
+  startLogout,
+  login,
+  logout
 };

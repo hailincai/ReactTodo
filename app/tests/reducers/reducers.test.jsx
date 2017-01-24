@@ -93,4 +93,23 @@ describe("Reducers", () => {
       expect(res[0].text).toEqual(todos[0].text);
     })
   });
+
+  describe("authReducer", () => {
+    it("should create auth for LOGIN action", () => {
+      var action = {type: "LOGIN", uid: "12345"};
+      var expectRes = {uid: "12345"};
+
+      var res = reducers.authReducer(df({}), df(action));
+      expect(res).toEqual(expectRes);
+    });
+
+    it("should remove auth for LOGOUT action", () => {
+      var action = {type: "LOGOUT"};
+      var expectRes = {};
+      var input = {uid: "12345"};
+
+      var res = reducers.authReducer(df(input), df(action));
+      expect(res).toEqual(expectRes);
+    });
+  });
 });
