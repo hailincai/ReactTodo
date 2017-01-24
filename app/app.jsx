@@ -1,14 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Route, Router, IndexRoute, hashHistory} from "react-router";
+import {hashHistory} from "react-router";
 import {Provider} from "react-redux";
+import firebase from "app/firebase/index";
 
-import TodoApp from "TodoApp";
-import LoginForm from "LoginForm";
-import TodoAPI from "TodoAPI";
 import actions from "actions";
 import configureStore from "configureStore";
+import router from "app/router/index";
 
+firebase.auth().onAuthStateChanged((user) => {
+  if (user) {
+    hashHistory.push("/todos");
+  }else{
+    hashHistory.push("/");
+  }
+});
 
 var store = configureStore.configure();
 
@@ -22,16 +28,12 @@ $(document).foundation();
 
 require("style!css!sass!applicationStyles");
 
+
 //using createClass method,
 //the method in the component are automatically bound to component itself
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path="/">
-        <Route path="todos" component={TodoApp}/>
-        <IndexRoute component={LoginForm}/>
-      </Route>
-    </Router>
+    {router}
   </Provider>,
   document.getElementById("app")
 );
