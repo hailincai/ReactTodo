@@ -11,6 +11,7 @@ import router from "app/router/index";
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     store.dispatch(actions.login(user.uid));
+    store.dispatch(actions.startAddTodos());
     hashHistory.push("/todos");
   }else{
     store.dispatch(actions.logout());
@@ -19,8 +20,6 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 var store = configureStore.configure();
-
-store.dispatch(actions.startAddTodos());
 
 //load foundation-sites
 //style! inject style in html
