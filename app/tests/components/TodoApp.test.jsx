@@ -7,7 +7,7 @@ import uuid from "node-uuid";
 import {Provider} from "react-redux";
 import configureStore from "configureStore";
 
-import TodoApp from "TodoApp";
+import {TodoApp} from "TodoApp";
 import TodoList from "TodoList";
 
 describe("TodoApp", () => {
